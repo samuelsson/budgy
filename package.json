@@ -1,0 +1,8 @@
+{
+  "name": "budgy",
+  "version": "0.1.0",
+  "description": "Your budget buddy",
+  "main": "index.js",
+  "author": "Samuelsson",
+  "license": "MIT"
+}
