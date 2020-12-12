@@ -13,12 +13,39 @@
       <input id="salary" type="number">
     </p>
     <p>
-      <span>Kontatinsats:</span>
+      <span>Kontantinsats:</span>
       <input id="cash-payment" type="number">
+    </p>
+    <p>
+      <span>Köpeskilling:</span>
+      <input id="house-cost" type="number">
+    </p>
+    <p>
+      <span>Ränta på lån:</span>
+      <input id="interest" type="number">
+    </p>
+    <p>
+      <span>Driftkostnad (per månad):</span>
+      <input id="operating-cost" type="number">
     </p>
   </form>
 
   <button type="button" onclick="submit()">Submit</button>
+
+  <p>
+    Lån:
+    <span id="res-loan">-</span>
+  </p>
+
+  <p>
+    Ränta per månad:
+    <span id="res-interest">-</span>
+  </p>
+
+  <p>
+    Amortering per månad:
+    <span id="res-mortgage">-</span>
+  </p>
 
   <script type="text/javascript" src="index.js"></script>
 </body>
