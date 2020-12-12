@@ -2,8 +2,10 @@ const get = (id) => document.getElementById(id).value;
 const set = (id, value) => document.getElementById(id).innerHTML = value;
 
 const setLoan = () => {
-  const loan = get('house-cost') - get('cash-payment');
-  set('res-loan', loan);
+  const houseCost = get('house-cost');
+  const loan = houseCost - get('cash-payment');
+  const loanPercentage = loan / houseCost * 100;
+  set('res-loan', `${loan} kr (${Math.round(loanPercentage)}%)`);
 }
 
 const setMortgage = () => {
@@ -11,7 +13,7 @@ const setMortgage = () => {
   const houseCost = get('house-cost');
   const loan = houseCost - get('cash-payment');
   const loanPercentage = loan / houseCost;
-  const salaryExceeded = loan > salary * 4.5;
+  const salaryExceeded = loan > salary * 12 * 4.5;
 
   console.log(loanPercentage);
 
