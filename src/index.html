@@ -6,7 +6,7 @@
 </head>
 <body>
   <h1>Budgy</h1>
-  <p>Alla uppgifter är det sammanlagda, t.ex. sammanlagt lön.</p>
+  <p>Alla uppgifter är det sammanlagda, t.ex. sammanlagd lön.</p>
   <form>
     <p>
       <span>Lön:</span>
@@ -23,6 +23,10 @@
     <p>
       <span>Ränta på lån:</span>
       <input id="interest" type="number">
+    </p>
+    <p>
+      <span>Befintliga pantbrev (kr):</span>
+      <input id="deed-of-trust" type="number">
     </p>
     <p>
       <span>Driftkostnad (per månad):</span>
@@ -45,6 +49,20 @@
   <p>
     Amortering per månad:
     <span id="res-mortgage">-</span>
+  </p>
+
+  <p>
+    <b>
+      Total engångskostnad:
+      <span id="res-one-time-payment">-</span>
+    </b>
+  </p>
+
+  <p>
+    <b>
+      Totalt per månad:
+      <span id="res-total">-</span>
+    </b>
   </p>
 
   <script type="text/javascript" src="index.js"></script>

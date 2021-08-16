@@ -8,14 +8,12 @@ const setLoan = () => {
   set('res-loan', `${loan} kr (${Math.round(loanPercentage)}%)`);
 }
 
-const setMortgage = () => {
+const generateMortgage = () => {
   const salary = get('salary');
   const houseCost = get('house-cost');
   const loan = houseCost - get('cash-payment');
   const loanPercentage = loan / houseCost;
   const salaryExceeded = loan > salary * 12 * 4.5;
-
-  console.log(loanPercentage);
 
   let mortgagePercentage;
 
@@ -29,6 +27,19 @@ const setMortgage = () => {
 
   const mortgagePaymentPerMonth = loan * (mortgagePercentage / 100) / 12;
 
+  return {mortgagePaymentPerMonth, mortgagePercentage};
+}
+
+const generateInterest = () => {
+  const houseCost = get('house-cost');
+  const loan = houseCost - get('cash-payment');
+  const interest = get('interest');
+  return loan * (interest / 100) /12;
+}
+
+const setMortgage = () => {
+  const {mortgagePaymentPerMonth, mortgagePercentage} = generateMortgage();
+
   set(
     'res-mortgage',
     `${Math.round(mortgagePaymentPerMonth)} kr (${mortgagePercentage}%)`
@@ -36,14 +47,33 @@ const setMortgage = () => {
 }
 
 const setInterest = () => {
+  const interest = generateInterest();
+  set('res-interest', `${Math.round(interest)} kr`);
+}
+
+const setTotal = () => {
+  const {mortgagePaymentPerMonth} = generateMortgage();
+  const interest = generateInterest();
+  const operatingCost = get('operating-cost');
+  set('res-total', `${Math.round(interest + mortgagePaymentPerMonth + +operatingCost)} kr`);
+}
+
+const setOneTimePayment = () => {
+  const cashPayment = get('cash-payment');
+  const deedOfTrust = get('deed-of-trust');
   const houseCost = get('house-cost');
   const loan = houseCost - get('cash-payment');
-  const interest = loan * (get('interest') / 100) /12;
-  set('res-interest', Math.round(interest));
+
+  const propertyTitle = houseCost * 0.015; // lagfart
+  const newDeedOfTrustCost = (loan - deedOfTrust) * 0.02;
+
+  set('res-one-time-payment', `${Math.round(+cashPayment + propertyTitle + newDeedOfTrustCost)} kr`);
 }
 
 const submit = () => {
   setLoan();
   setMortgage();
   setInterest();
+  setTotal();
+  setOneTimePayment();
 }
